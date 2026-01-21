@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'  // This name must match the name you configured in Jenkins
-    }
-
     triggers {
         githubPush()   
     }
+
+    tools {
+    maven 'Maven'  // This name must match the name you configured in Jenkins
+}
 
     stages {
 
@@ -52,4 +52,4 @@ pipeline {
     }
 
     // new test
-}
+}// new2
