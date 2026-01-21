@@ -42,6 +42,7 @@ pipeline {
         }*/
     }
 //
+// test for webhooks YEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
     post {
         success {
             echo 'Build et analyse terminés avec succès !'
