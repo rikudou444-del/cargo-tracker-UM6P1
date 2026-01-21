@@ -22,7 +22,7 @@ pipeline {
        /* stage('SonarQube Analysis') {
             environment {
                 SONAR_TOKEN = credentials('sonar-token-id')
-            }*/
+            }
             steps {
                 withSonarQubeEnv('SonarQube Local') {
                     bat """
@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-    }
+    }*/
 //
     post {
         success {
