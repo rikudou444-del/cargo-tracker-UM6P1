@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'  // This name must match the name you configured in Jenkins
+    }
+
     triggers {
         githubPush()   
     }
