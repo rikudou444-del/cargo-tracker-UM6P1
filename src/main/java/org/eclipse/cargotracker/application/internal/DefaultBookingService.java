@@ -21,10 +21,14 @@ import org.eclipse.cargotracker.domain.service.RoutingService;
 @Stateless
 public class DefaultBookingService implements BookingService {
 
-  @Inject private CargoRepository cargoRepository;
-  @Inject private LocationRepository locationRepository;
-  @Inject private RoutingService routingService;
-  @Inject private Logger logger;
+  @Inject
+  private CargoRepository cargoRepository;
+  @Inject
+  private LocationRepository locationRepository;
+  @Inject
+  private RoutingService routingService;
+  @Inject
+  private Logger logger;
 
   @Override
   public TrackingId bookNewCargo(
@@ -32,8 +36,7 @@ public class DefaultBookingService implements BookingService {
     TrackingId trackingId = cargoRepository.nextTrackingId();
     Location origin = locationRepository.find(originUnLocode);
     Location destination = locationRepository.find(destinationUnLocode);
-    RouteSpecification routeSpecification =
-        new RouteSpecification(origin, destination, arrivalDeadline);
+    RouteSpecification routeSpecification = new RouteSpecification(origin, destination, arrivalDeadline);
 
     Cargo cargo = new Cargo(trackingId, routeSpecification);
 
@@ -70,9 +73,8 @@ public class DefaultBookingService implements BookingService {
     Cargo cargo = cargoRepository.find(trackingId);
     Location newDestination = locationRepository.find(unLocode);
 
-    RouteSpecification routeSpecification =
-        new RouteSpecification(
-            cargo.getOrigin(), newDestination, cargo.getRouteSpecification().getArrivalDeadline());
+    RouteSpecification routeSpecification = new RouteSpecification(
+        cargo.getOrigin(), newDestination, cargo.getRouteSpecification().getArrivalDeadline());
     cargo.specifyNewRoute(routeSpecification);
 
     cargoRepository.store(cargo);
@@ -80,16 +82,15 @@ public class DefaultBookingService implements BookingService {
     logger.log(
         Level.INFO,
         "Changed destination for cargo {0} to {1}",
-        new Object[] {trackingId, routeSpecification.getDestination()});
+        new Object[] { trackingId, routeSpecification.getDestination() });
   }
 
   @Override
   public void changeDeadline(TrackingId trackingId, LocalDate newDeadline) {
     Cargo cargo = cargoRepository.find(trackingId);
 
-    RouteSpecification routeSpecification =
-        new RouteSpecification(
-            cargo.getOrigin(), cargo.getRouteSpecification().getDestination(), newDeadline);
+    RouteSpecification routeSpecification = new RouteSpecification(
+        cargo.getOrigin(), cargo.getRouteSpecification().getDestination(), newDeadline);
     cargo.specifyNewRoute(routeSpecification);
 
     cargoRepository.store(cargo);
@@ -97,6 +98,11 @@ public class DefaultBookingService implements BookingService {
     logger.log(
         Level.INFO,
         "Changed deadline for cargo {0} to {1}",
-        new Object[] {trackingId, newDeadline});
+        new Object[] { trackingId, newDeadline });
+  }
+
+  public void supportCargo(TrackingId trackingId) { // i add this delete it
+    System.out.println("Supported cargo " + trackingId);
   }
 }
+// modif
